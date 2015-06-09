@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Preguntas</title>
-  </head>
-  <body>
-  	<form method="GET" action="/quizes/answer">
-    	<h2>Pregunta: ¿<%= pregunta %>?</h2>
-    	Responda aqui: <input type="text" name="respuesta"/><br/>
-    	<input type="submit" value="Enviar"/>
-    </form>
-  </body>
-</html>
+<form method="GET" action="/quizes/answer">
+	<h2>Pregunta: ¿<%= pregunta %>?</h2>
+    Responda aqui: <input type="text" name="respuesta"/><br/>
+    <input type="submit" value="Enviar"/>
+</form>
