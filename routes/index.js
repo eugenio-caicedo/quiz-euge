@@ -20,6 +20,9 @@ router.param('quizId', quizController.load);
 //Lista Preguntas
 router.get('/quizes', quizController.index);
 
+//Buscar
+router.get('/find', quizController.find);
+
 // Pregunta
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 

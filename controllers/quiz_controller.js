@@ -20,9 +20,24 @@ exports.load=function(req, resp, next, quizId){
 
 //GET/ index
 exports.index=function(req, resp){
-	Quiz.findAll().then(function(quizzes){
-		resp.render('quizes/index.ejs', {quizzes:quizzes});
-	});
+	var search = req.query.search;
+	if(search===null || search===undefined)
+		Quiz.findAll().then(function(quizzes){
+			resp.render('quizes/index.ejs', {quizzes:quizzes});
+		});
+	else
+		Quiz.findAll({
+			where: ["pregunta like ?", "%"+search.replace(/\s/gi, '%')+"%"],
+			order: 'pregunta'
+		})
+		.then(function(quizzes){
+			resp.render('quizes/index.ejs', {quizzes:quizzes});
+		});
+};
+
+//GET/ find
+exports.find=function(req, resp){
+	resp.render('quizes/find.ejs');
 };
 
 // GET/ quizes/question
