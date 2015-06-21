@@ -5,7 +5,7 @@ var Quiz = models.Quiz;
 //Auto-Load funcion que factoriza el codigo si la ruta contiene quizId
 exports.load=function(req, resp, next, quizId){
 	try {
-		Quiz.find(quizId).success(function(quiz){
+		Quiz.find(quizId).then(function(quiz){
 			if(quiz){
 				req.quiz=quiz;
 				next();
@@ -20,7 +20,7 @@ exports.load=function(req, resp, next, quizId){
 
 //GET/ index
 exports.index=function(req, resp){
-	Quiz.findAll().success(function(quizzes){
+	Quiz.findAll().then(function(quizzes){
 		resp.render('quizes/index.ejs', {quizzes:quizzes});
 	});
 };
