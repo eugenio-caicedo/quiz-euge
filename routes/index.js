@@ -14,10 +14,13 @@ router.get('/author', function(req, res){
 });
 
 /* GET quizes*/
-// Preguntas
-router.get('/quizes/question', quizController.question);
+//Lista Preguntas
+router.get('/quizes', quizController.index);
 
-//Respuestas
-router.get('/quizes/answer', quizController.answer);
+// Pregunta
+router.get('/quizes/:quizId(\\d+)', quizController.show);
+
+//Respuesta
+router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
 module.exports = router;
