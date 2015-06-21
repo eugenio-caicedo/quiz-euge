@@ -14,6 +14,9 @@ router.get('/author', function(req, res){
 });
 
 /* GET quizes*/
+//Auto-Load
+router.param('quizId', quizController.load);
+
 //Lista Preguntas
 router.get('/quizes', quizController.index);
 
