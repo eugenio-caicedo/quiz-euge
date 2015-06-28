@@ -45,6 +45,24 @@ exports.show=function(req, resp){
 	resp.render('quizes/question', {quiz:req.quiz});
 };
 
+//GET/ quizes/new
+exports.new=function(req, resp){
+	var quiz = Quiz.build({
+		pregunta: "Pregunta",
+		respuesta: "Respuesta"
+	});
+	resp.render('quizes/new', {quiz:quiz});
+};
+
+exports.create=function(req, resp){
+	var quiz = Quiz.build(req.body.quiz);
+	//Se especifican los fiel por cuestiones de seguridad
+	quiz.save({fields:["pregunta", "respuesta"]})
+		.then(function(){
+			resp.redirect('/quizes');
+		});
+};
+
 // GET/ quizes/answer
 exports.answer=function(req, resp){
 	var quiz=req.quiz;
