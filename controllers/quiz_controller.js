@@ -64,7 +64,31 @@ exports.create=function(req, resp){
 			//Se especifican los fiel por cuestiones de seguridad
 			quiz.save({fields:["pregunta", "respuesta"]})
 				.then(function(){
-					resp.redirect('/quizes', {errors: []});
+					resp.redirect('/quizes');
+				});
+		}
+	});
+};
+
+//GET/ quizes/edit
+exports.edit=function(req, resp){
+	var quiz=req.quiz;
+	resp.render('quizes/edit', {quiz: quiz, errors: []});
+};
+
+exports.update=function(req, resp){
+	var quiz=req.quiz;
+	quiz.pregunta=req.body.quiz.pregunta;
+	quiz.respuesta=req.body.quiz.respuesta;
+	//Se Valida los datos del objeto
+	quiz.validate().then(function(err){
+		if(err)
+			resp.render('quizes/edit', {quiz:quiz, errors : err.errors});
+		else {
+			//Se especifican los fiel por cuestiones de seguridad
+			quiz.save({fields:["pregunta", "respuesta"]})
+				.then(function(){
+					resp.redirect('/quizes');
 				});
 		}
 	});
