@@ -94,6 +94,16 @@ exports.update=function(req, resp){
 	});
 };
 
+exports.destroy=function(req, resp){
+	req.quiz.destroy()
+		.then(function(){
+			resp.redirect('/quizes');
+		})
+		.catch(function(error){
+			next(error);
+		});
+};
+
 // GET/ quizes/answer
 exports.answer=function(req, resp){
 	var quiz=req.quiz;
