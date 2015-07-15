@@ -49,7 +49,8 @@ exports.show=function(req, resp){
 exports.new=function(req, resp){
 	var quiz = Quiz.build({
 		pregunta: "Pregunta",
-		respuesta: "Respuesta"
+		respuesta: "Respuesta",
+		tema: null
 	});
 	resp.render('quizes/new', {quiz:quiz, errors: []});
 };
@@ -62,7 +63,7 @@ exports.create=function(req, resp){
 			resp.render('quizes/new', {quiz:quiz, errors : err.errors});
 		else {
 			//Se especifican los fiel por cuestiones de seguridad
-			quiz.save({fields:["pregunta", "respuesta"]})
+			quiz.save({fields:["pregunta", "respuesta", "tema"]})
 				.then(function(){
 					resp.redirect('/quizes');
 				});
@@ -80,13 +81,14 @@ exports.update=function(req, resp){
 	var quiz=req.quiz;
 	quiz.pregunta=req.body.quiz.pregunta;
 	quiz.respuesta=req.body.quiz.respuesta;
+	quiz.tema=req.body.quiz.tema;
 	//Se Valida los datos del objeto
 	quiz.validate().then(function(err){
 		if(err)
 			resp.render('quizes/edit', {quiz:quiz, errors : err.errors});
 		else {
 			//Se especifican los fiel por cuestiones de seguridad
-			quiz.save({fields:["pregunta", "respuesta"]})
+			quiz.save({fields:["pregunta", "respuesta", "tema"]})
 				.then(function(){
 					resp.redirect('/quizes');
 				});
