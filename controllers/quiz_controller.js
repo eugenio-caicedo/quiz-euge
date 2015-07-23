@@ -5,7 +5,10 @@ var Quiz = models.Quiz;
 //Auto-Load funcion que factoriza el codigo si la ruta contiene quizId
 exports.load=function(req, resp, next, quizId){
 	try {
-		Quiz.find(quizId).then(function(quiz){
+		Quiz.find({
+			where:{ id:Number(quizId) },
+			include: [ { model:models.Comment } ]
+		}).then(function(quiz){
 			if(quiz){
 				req.quiz=quiz;
 				next();
