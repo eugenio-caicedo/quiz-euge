@@ -1,5 +1,5 @@
 //MW que verifica si esta iniciada la session
-exports.loginRequired=function(req, resp){
+exports.loginRequired=function(req, resp, next){
 	if(req.session.user)
 		next();
 	else
