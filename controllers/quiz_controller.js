@@ -45,7 +45,6 @@ exports.find=function(req, resp){
 
 // GET/ quizes/question
 exports.show=function(req, resp){
-	console.log("PASO GET SHOW QUESTION")
 	resp.render('quizes/question', {quiz:req.quiz, errors: []});
 };
 

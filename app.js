@@ -39,6 +39,22 @@ app.use(function(req, resp, next){
 	next();
 });
 
+app.use(function(req, resp, next){
+	if(req.session.user){
+		if(req.session.timeLogout){
+			var diff = ( (new Date()).getMinutes() - Number(req.session.timeLogout) );
+			if(diff >= 2){
+				delete req.session.timeLogout;
+				delete req.session.user;
+				resp.redirect('/login');
+			}
+		}
+		else
+			req.session.timeLogout = (new Date()).getMinutes();
+	}
+	next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
