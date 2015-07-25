@@ -33,15 +33,15 @@ router.get('/find', quizController.find);
 // Pregunta
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 
-router.get('/quizes/new', quizController.new);
+router.get('/quizes/new', sessionController.loginRequired, quizController.new);
 
-router.get('/quizes/:quizId(\\d+)/edit', quizController.edit);
+router.get('/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizController.edit);
 
-router.post('/quizes/create', quizController.create);
+router.post('/quizes/create', sessionController.loginRequired, quizController.create);
 
-router.put('/quizes/:quizId(\\d+)', quizController.update);
+router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.update);
 
-router.delete('/quizes/:quizId(\\d+)', quizController.destroy);
+router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 
 //Comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);

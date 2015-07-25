@@ -1,3 +1,11 @@
+//MW que verifica si esta iniciada la session
+exports.loginRequired=function(req, resp){
+	if(req.session.user)
+		next();
+	else
+		resp.redirect('/login');
+};
+
 //GET/ login
 exports.new=function(req, resp){
 	var errors = req.session.errors || {};
