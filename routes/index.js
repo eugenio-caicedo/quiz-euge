@@ -4,6 +4,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var statisticController = require('../controllers/statistic_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -53,5 +54,9 @@ router.put('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)', commentController.
 
 //Respuesta
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+
+//Estadisticas
+//Quiz
+router.get('/quizes/statistics', statisticController.quizEstadisticas);
 
 module.exports = router;
