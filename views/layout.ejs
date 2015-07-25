@@ -15,6 +15,20 @@
   </head>
   <body id="page-wrap">
   	<header class="main" id="h1">
+  		<% if(!session.user) { %>
+  			<span class="right">
+  				<form method="get" action="/login">
+  					<input type="submit" value="Login"/>
+  				</form>
+  			</span>
+  		<% } else { %>
+  			<span class="right">
+  				<form method="post" action="/logout?_method=delete">
+  					<label><%= session.user.username %></label>
+  					<input type="submit" value="Logout"/>
+  				</form>
+  			</span>
+  		<% } %> 
   		<h2>Quiz<span>: el juego de las preguntas</span></h2>
   	</header>
   	<nav class="main" id="n1" role="navigation">
