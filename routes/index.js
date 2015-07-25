@@ -44,8 +44,12 @@ router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizControl
 router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 
 //Comentarios
+//Auto-Load
+router.param('commentId', commentController.load);
+
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
+router.put('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)', commentController.publish);
 
 //Respuesta
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);

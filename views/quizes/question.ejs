@@ -8,6 +8,22 @@
 <p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
 
 <p><strong>Comentarios:</strong><p>
-<% for(var index in quiz.Comments){ %>
-	<p><%= quiz.Comments[index].texto %></p>
-<% } %>
+<div align="center">
+	<table>
+	<% for(var index in quiz.Comments){
+		 if(quiz.Comments[index].publicado || session.user) { %>
+	 	<tr>
+			<td><p><%= quiz.Comments[index].texto %></p></td>
+			<% if(!quiz.Comments[index].publicado && session.user) { %>
+				<td>
+					<form method="post" 
+						action="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>?_method=put">
+						<input type="submit" value="Publicar">
+					</form>
+				</td>
+			<% } %>
+		</tr>
+	<%	 }
+	   } %>
+	</table>
+</div>
